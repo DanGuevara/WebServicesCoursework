@@ -1,13 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
-import {NgxSoapService, Client, ISoapMethodResponse} from 'ngx-soap';
-import * as xmlrpc from 'xmlrpc';
 import {UserRestService} from './services/user-rest.service';
 import {UserModel} from './models/user.model';
 import {UserSoapService} from './services/user-soap.service';
-import {async} from 'rxjs/internal/scheduler/async';
 import {UserXmlRpcService} from './services/user-xml-rpc.service';
 
 @Component({
@@ -46,18 +40,26 @@ export class AppComponent implements OnInit {
   }
 
   public onGetUserWithSoapClick() {
-    this.userSoapService.getUserById('5');
+    this.userSoapService.getUserById('5').subscribe((res: UserModel) => {
+      console.log(res);
+    });
   }
 
   public onGetListUsersWithSoapClick() {
-    this.userSoapService.getAllUsers();
+    this.userSoapService.getAllUsers().subscribe((res: UserModel[]) => {
+      console.log(res);
+    });
   }
 
   public onGetUserWithXmlRpcClick() {
-    this.userXmlRpcService.getUserById('5');
+    this.userXmlRpcService.getUserById('5').subscribe((res: UserModel) => {
+      console.log(res);
+    });
   }
 
   public onGetListUsersWithXmlRpcClick() {
-    this.userXmlRpcService.getListUsers();
+    this.userXmlRpcService.getListUsers().subscribe((res: UserModel[]) => {
+      console.log(res);
+    });
   }
 }
