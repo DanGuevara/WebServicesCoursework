@@ -6,8 +6,11 @@ using CourseWork.Models.SOAP;
 using CourseWork.Services.SOAP;
 using CourseWork.Services.XMLRPC;
 using Horizon.XmlRpc.AspNetCore.Extensions;
+using LibraryApi.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -35,6 +38,11 @@ namespace CourseWork
             services.AddXmlRpc();
             services.TryAddSingleton<ISampleService, SampleService>();
             services.TryAddSingleton<IUserServiceSoap, UserServiceSoap>();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddDbContext<LibraryContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("SkinsDatabase")));
+            services.AddControllers();
 
             services.Configure<IISServerOptions>(options =>
             {

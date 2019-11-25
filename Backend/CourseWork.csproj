@@ -16,7 +16,10 @@
     <PackageReference Include="Horizon.XmlRpc.Client" Version="2.5.0" />
     <PackageReference Include="Horizon.XmlRpc.Core" Version="2.5.0" />
     <PackageReference Include="Horizon.XmlRpc.Server" Version="2.5.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.1" />
     <PackageReference Include="SoapCore" Version="0.9.9.8-beta" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
   </ItemGroup>
 
 </Project>
