@@ -11,5 +11,23 @@ namespace CourseWork.Services.XMLRPC
 
         [XmlRpcMethod("getAll")]
         UserModel[] GetAll();
+
+        [XmlRpcMethod("GetAllTobaccos")]
+        HookahTobacco[] GetAllTobaccos();
+
+        [XmlRpcMethod("CreateTobacco")]
+        void CreateTobacco(HookahTobacco tobacco);
+
+        [XmlRpcMethod("GetAllCompanies")]
+        Company[] GetAllCompanies();
+
+        [XmlRpcMethod("CreateCompany")]
+        void CreateCompany(Company company);
+
+        [XmlRpcMethod("GetAllTastes")]
+        Taste[] GetAllTastes();
+
+        [XmlRpcMethod("CreateTaste")]
+        void CreateTaste(Taste taste);
     }
 }

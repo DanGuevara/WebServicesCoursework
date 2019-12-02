@@ -5,6 +5,7 @@ using Horizon.XmlRpc.Server;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Xml;
 
@@ -13,14 +14,56 @@ namespace CourseWork.Services.XMLRPC
     public class UserServiceXmlRpc : XmlRpcListenerService, IUserServiceXmlRpc
     {
         private UserDataProvider _userDataProvider;
+        private MongoDataProvider _mongoDataProvider;
 
         public UserServiceXmlRpc()
         {
             _userDataProvider = new UserDataProvider();
+            _mongoDataProvider = new MongoDataProvider();
         }
         public UserModel[] GetAll()
         {
             return _userDataProvider.GetAllUsers().ToArray();
+        }
+
+        public HookahTobacco[] GetAllTobaccos()
+        {
+            return _mongoDataProvider.GetAllTobaccos().Result.ToArray();
+        }
+
+        public async void CreateTobacco(HookahTobacco tobacco)
+        {
+            if (tobacco != null)
+            {
+                tobacco.Id = null;
+                await _mongoDataProvider.Create(tobacco);
+            }
+        }
+
+        public Company[] GetAllCompanies()
+        {
+            return _mongoDataProvider.GetAllCompanies().Result.ToArray();
+        }
+
+        public async void CreateCompany(Company company)
+        {
+            if (company != null)
+            {
+                await _mongoDataProvider.CreateCompany(company);
+            }
+        }
+
+        public Taste[] GetAllTastes()
+        {
+            return _mongoDataProvider.GetAllTastes().Result.ToArray();
+        }
+
+        public async void CreateTaste(Taste taste)
+        {
+            if (taste != null)
+            {
+                await _mongoDataProvider.CreateTaste(taste);
+            }
         }
 
         public UserModel GetById(string id)
