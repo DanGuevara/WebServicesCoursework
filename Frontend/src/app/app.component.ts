@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {UserRestService} from './services/user-rest.service';
-import {UserModel} from './models/user.model';
 import {UserSoapService} from './services/user-soap.service';
 import {UserXmlRpcService} from './services/user-xml-rpc.service';
+import {ConnectionTypeEnum, ConnectionTypeService} from './services/connection-type.service';
+import {BehaviorSubject} from 'rxjs';
+import {ConnectionProxyService} from './services/connection-proxy.service';
+import {TasteModel} from './models/taste.model';
 
 @Component({
   selector: 'app-root',
@@ -12,53 +15,39 @@ import {UserXmlRpcService} from './services/user-xml-rpc.service';
     UserRestService,
     UserSoapService,
     UserXmlRpcService,
+    ConnectionTypeService,
+    ConnectionProxyService,
   ]
 })
 export class AppComponent implements OnInit {
   title = 'course-work-app';
 
+  public currentConnection$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  public connectionTypes$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+
   constructor(
-    private userRestService: UserRestService,
-    private userSoapService: UserSoapService,
-    private userXmlRpcService: UserXmlRpcService) {
+    private currentConnectionService: ConnectionTypeService,
+    private connectionProxyService: ConnectionProxyService) {
   }
 
   ngOnInit(): void {
+    this.currentConnection$.next(this.currentConnectionService.getCurrentConnection().toString());
+    this.connectionTypes$.next(Object.keys(ConnectionTypeEnum).map(k => ConnectionTypeEnum[k as any]));
+  }
 
+  public onMenuButtonClick(value: string): void {
+    this.currentConnectionService.setCurrentConnection(value as ConnectionTypeEnum);
+    this.currentConnection$.next(this.currentConnectionService.getCurrentConnection().toString());
   }
 
   public onGetUserWithRestClick() {
-    this.userRestService.getUserById('5').pipe().subscribe((next: UserModel) => {
-      console.log(next);
+    this.connectionProxyService.createTaste(<TasteModel> {Name: 'Sweet', Id: ''}).pipe().subscribe((res: any) => {
+      console.log('created');
     });
   }
 
   public onGetListUsersWithRestClick() {
-    this.userRestService.getListUsers().pipe().subscribe((next: UserModel[]) => {
-      console.log(next);
-    });
-  }
-
-  public onGetUserWithSoapClick() {
-    this.userSoapService.getUserById('5').subscribe((res: UserModel) => {
-      console.log(res);
-    });
-  }
-
-  public onGetListUsersWithSoapClick() {
-    this.userSoapService.getAllUsers().subscribe((res: UserModel[]) => {
-      console.log(res);
-    });
-  }
-
-  public onGetUserWithXmlRpcClick() {
-    this.userXmlRpcService.getUserById('5').subscribe((res: UserModel) => {
-      console.log(res);
-    });
-  }
-
-  public onGetListUsersWithXmlRpcClick() {
-    this.userXmlRpcService.getListUsers().subscribe((res: UserModel[]) => {
+    this.connectionProxyService.getTastesList().pipe().subscribe((res: TasteModel[]) => {
       console.log(res);
     });
   }

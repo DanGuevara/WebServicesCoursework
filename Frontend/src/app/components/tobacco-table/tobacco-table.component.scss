@@ -1,0 +1,155 @@
+:host {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  .table {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    margin-bottom: 0;
+    overflow: auto;
+    scroll-behavior: smooth;
+    width: inherit;
+
+    &__over-header {
+      padding: 10px 16px;
+
+      sc-button {
+        float: right;
+        color: green;
+
+        //& /deep/ {
+        //  .text {
+        //    border-bottom: 1px dashed green;
+        //    line-height: 20px;
+        //    padding: 0;
+        //  }
+        //}
+      }
+    }
+
+    &__header {
+      background-color: white;
+      cursor: default;
+      border-bottom: 1px solid silver;
+      border-top: 1px solid silver;
+      flex: 0 0 auto;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      font-size: 13px;
+      color: gray;
+      padding: 0 8px*2;
+
+      //& /deep/ {
+      //  .table__cell {
+      //    padding: 8px 8px 8px 0;
+      //  }
+      //}
+    }
+
+    &__body {
+      margin-top: -1px;
+      scroll-behavior: smooth;
+      flex: 1 1 auto;
+      font-size: 15px;
+      // color: aliceblue;
+      background: white;
+      padding: 0 8px*2;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    &__row {
+      display: flex;
+
+      &_item {
+        border-top: 1px solid silver;
+        cursor: pointer;
+      }
+
+      &:hover {
+        //& /deep/ {
+        //  .table__action > .table__button_edit {
+        //    opacity: 1;
+        //  }
+        //}
+      }
+    }
+
+    &__cell {
+      padding: 8px * 2 8px 8px * 2 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &_date-created {
+        flex: 0 0 25%;
+        width: 25%;
+      }
+
+      &_department {
+        flex: 0 0 25%;
+        width: 25%;
+      }
+
+      &_ehr-history-number {
+        flex: 0 0 25%;
+        width: 25%;
+      }
+
+      &_empty {
+        color: gray;
+
+        &:before {
+          content: '—';
+        }
+      }
+
+      &_bold {
+        font-weight: 600;
+      }
+
+      &_faded {
+        color: gray;
+      }
+    }
+
+    &__info {
+      display: flex;
+      flex-grow: 1;
+      width: 0px;
+
+      &_body {
+        &:hover {
+          background-color: antiquewhite;
+        }
+      }
+    }
+
+    &__action {
+      display: flex;
+    }
+
+    &__button {
+      overflow: hidden;
+      width: 68px;
+
+      &_edit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        color: green;
+
+        &:hover {
+          background-color: antiquewhite;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

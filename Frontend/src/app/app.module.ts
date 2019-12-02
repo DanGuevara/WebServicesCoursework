@@ -1,19 +1,29 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxSoapModule} from 'ngx-soap';
 import {MatButtonModule, MatMenuModule, MatToolbarModule} from '@angular/material';
+import {TobaccoTableComponent} from './components/tobacco-table/tobacco-table.component';
+import {RouterModule, Routes} from '@angular/router';
+
+// определение маршрутов
+const appRoutes: Routes = [
+  // { path: '', component: AppComponent},
+  {path: 'tobaccos', component: TobaccoTableComponent},
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TobaccoTableComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(appRoutes),
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -25,4 +35,5 @@ import {MatButtonModule, MatMenuModule, MatToolbarModule} from '@angular/materia
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

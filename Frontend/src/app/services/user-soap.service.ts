@@ -1,8 +1,11 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {UserModel} from '../models/user.model';
 import {map} from 'rxjs/operators';
 import {Client, NgxSoapService} from 'ngx-soap';
+import {HookahTobaccoModel} from '../models/hookah-tobacco.model';
+import {CompanyModel} from '../models/company.model';
+import {TasteModel} from '../models/taste.model';
 
 @Injectable()
 export class UserSoapService {
@@ -28,6 +31,54 @@ export class UserSoapService {
     return (this.soapClient.getValue() as any).GetAll('stub').pipe(
       map((result: any) => {
         return result.result.GetAllResult.UserModel;
+      })
+    );
+  }
+
+  public getAllTobaccos(): Observable<HookahTobaccoModel[]> {
+    return (this.soapClient.getValue() as any).GetAllTobaccos('stub').pipe(
+      map((result: any) => {
+        return result.result.GetAllTobaccosResult.HookahTobacco;
+      })
+    );
+  }
+
+  public createTobacco(tobacco: HookahTobaccoModel): Observable<any> {
+    return (this.soapClient.getValue() as any).CreateTobacco({tobacco: tobacco}).pipe(
+      map((result: any) => {
+        return of('');
+      })
+    );
+  }
+
+  public getAllCompanies(): Observable<CompanyModel[]> {
+    return (this.soapClient.getValue() as any).GetAllCompanies('stub').pipe(
+      map((result: any) => {
+        return result.result.GetAllCompaniesResult.Company;
+      })
+    );
+  }
+
+  public createCompany(company: CompanyModel): Observable<any> {
+    return (this.soapClient.getValue() as any).CreateCompany({company: company}).pipe(
+      map((result: any) => {
+        return of('');
+      })
+    );
+  }
+
+  public getAllTastes(): Observable<TasteModel[]> {
+    return (this.soapClient.getValue() as any).GetAllTastes('stub').pipe(
+      map((result: any) => {
+        return result.result.GetAllTastesResult.Taste;
+      })
+    );
+  }
+
+  public createTaste(taste: TasteModel): Observable<any> {
+    return (this.soapClient.getValue() as any).CreateTaste({taste: taste}).pipe(
+      map((result: any) => {
+        return of('');
       })
     );
   }
