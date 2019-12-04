@@ -1,0 +1,27 @@
+<div class="table">
+  <button mat-raised-button color="accent" (click)="onCreateButtonClick()">Create Taste</button>
+  <div class="table__header">
+    <div class="table__row">
+      <div class="table__info">
+        <div class="table__cell table__cell_date-created" title="Дата создания">Название</div>
+      </div>
+      <div class="table__action">
+        <div class="table__button"></div>
+      </div>
+    </div>
+  </div>
+  <div class="table__body">
+    <div class="table__row table__row_item" *ngFor="let taste of tastes | async">
+      <div class="table__info table__info_body" (click)="selectDocument.emit(item.documentId)">
+        <div class="table__cell table__cell_date-created table__cell_faded">
+          {{taste.Name}}
+        </div>
+      </div>
+      <div class="table__action">
+        <!--<div class="table__button table__button_edit" cellTooltip="Дополнить" (click)="onClickFinishDocument(item)">-->
+        <!--<sc-svg-icon size="s" type="edit"></sc-svg-icon>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </div>
+</div>

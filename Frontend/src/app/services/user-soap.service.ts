@@ -38,13 +38,25 @@ export class UserSoapService {
   public getAllTobaccos(): Observable<HookahTobaccoModel[]> {
     return (this.soapClient.getValue() as any).GetAllTobaccos('stub').pipe(
       map((result: any) => {
-        return result.result.GetAllTobaccosResult.HookahTobacco;
+        return result.result.GetAllTobaccosResult.HookahTobacco.map((tobacco: any) => {
+          return <HookahTobaccoModel> {
+            Name: tobacco.Name,
+            Company: tobacco.Company,
+            Id: tobacco.Id,
+            Rate: tobacco.Rate,
+            Tastes: tobacco.Tastes.Taste
+          };
+        });
       })
     );
   }
 
   public createTobacco(tobacco: HookahTobaccoModel): Observable<any> {
-    return (this.soapClient.getValue() as any).CreateTobacco({tobacco: tobacco}).pipe(
+    const soapTobacco: any = {
+      ...tobacco,
+      Tastes: {Taste: tobacco.Tastes}
+    };
+    return (this.soapClient.getValue() as any).CreateTobacco({tobacco: soapTobacco}).pipe(
       map((result: any) => {
         return of('');
       })

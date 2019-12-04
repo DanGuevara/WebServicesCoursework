@@ -1,0 +1,7 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input [formControl]="name" matInput placeholder="Company name" required>
+    <mat-error *ngIf="name.invalid">Введите название компании!</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onCreateButtonClick()" [disabled]="name.invalid">CreateCompany</button>
+</form>

@@ -6,7 +6,9 @@ export enum ConnectionTypeEnum {
   XMLRPC = 'XMLRPC'
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ConnectionTypeService {
 
   private _currentConnection: ConnectionTypeEnum = ConnectionTypeEnum.REST;

@@ -1,10 +1,11 @@
 <div class="table">
-  <button mat-raised-button color="primary" (click)="onGetUserWithRestClick()">GetTobaccos</button>
+  <button mat-raised-button color="accent" (click)="onCreateButtonClick()">Create Tobacco</button>
   <div class="table__header">
     <div class="table__row">
       <div class="table__info">
         <div class="table__cell table__cell_date-created" title="Дата создания">Название</div>
         <div class="table__cell table__cell_department" title="Отделение">Марка</div>
+        <div class="table__cell table__cell_department" title="Отделение">Вкусы</div>
         <div class="table__cell table__cell_ehr-history-number" title="№ ИБ/ИР">Оценка</div>
       </div>
       <div class="table__action">
@@ -19,7 +20,10 @@
             {{tobacco.Name}}
           </div>
           <div class="table__cell table__cell_department">
-            {{tobacco.Company}}
+            {{tobacco.Company.Name}}
+          </div>
+          <div class="table__cell table__cell_department">
+            {{getTastesAsString(tobacco.Tastes)}}
           </div>
           <div class="table__cell table__cell_ehr-history-number table__cell_bold">
             {{tobacco.Rate}}

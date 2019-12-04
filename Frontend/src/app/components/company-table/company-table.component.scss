@@ -20,6 +20,7 @@
       sc-button {
         float: right;
         color: green;
+
       }
     }
 
@@ -35,6 +36,7 @@
       font-size: 13px;
       color: gray;
       padding: 0 8px*2;
+
     }
 
     &__body {
@@ -64,18 +66,8 @@
       white-space: nowrap;
 
       &_date-created {
-        flex: 0 0 20%;
-        width: 20%;
-      }
-
-      &_department {
-        flex: 0 0 20%;
-        width: 20%;
-      }
-
-      &_ehr-history-number {
-        flex: 0 0 20%;
-        width: 20%;
+        flex: 0 0 50%;
+        width: 50%;
       }
 
       &_empty {

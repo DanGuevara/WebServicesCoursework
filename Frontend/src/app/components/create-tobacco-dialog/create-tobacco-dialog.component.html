@@ -1,0 +1,27 @@
+<form class="example-form" [formGroup]="form" >
+  <mat-form-field class="example-full-width">
+    <input formControlName="name" matInput placeholder="Tobacco name" required>
+    <mat-error *ngIf="form.get('name').invalid">Введите название табака!</mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Select company</mat-label>
+    <mat-select formControlName="company">
+      <mat-option *ngFor="let company of companies$ | async" [value]="company">
+        {{company.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Select tastes</mat-label>
+    <mat-select formControlName="tastes" multiple>
+      <mat-option *ngFor="let taste of tastes$ | async" [value]="taste">
+        {{taste.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input type="number" formControlName="rate" matInput placeholder="Rate" required>
+    <mat-error *ngIf="form.get('rate').invalid">Поставьте оценку!</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onCreateButtonClick()" [disabled]="form.invalid">Create Taste</button>
+</form>

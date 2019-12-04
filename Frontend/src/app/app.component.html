@@ -1,5 +1,13 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
+    <button mat-icon-button [matMenuTriggerFor]="mainMenu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #mainMenu="matMenu">
+      <button mat-menu-item routerLink="/tobaccos">Tobaccos</button>
+      <button mat-menu-item routerLink="/companies">Companies</button>
+      <button mat-menu-item routerLink="/tastes">Tastes</button>
+    </mat-menu>
     <span>My Application</span>
     <span class="example-spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">{{currentConnection$ | async}}</button>
@@ -10,6 +18,4 @@
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
-<button mat-raised-button color="primary" (click)="onGetUserWithRestClick()">GetUserWithRest</button>
-<button mat-raised-button color="accent" (click)="onGetListUsersWithRestClick()">GetListUsersWithRest</button>
 <router-outlet></router-outlet>
