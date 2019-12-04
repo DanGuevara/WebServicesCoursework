@@ -10,6 +10,6 @@ namespace CourseWork.Models
         public string Name { get; set; }
         public Company Company { get; set; }
         public Taste[] Tastes { get; set; }
-        public double Rate { get; set; }
+        public int Rate { get; set; }
     }
 }
